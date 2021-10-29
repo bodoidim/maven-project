@@ -1,5 +1,9 @@
 pipeline{
   agent any
+  triggers {
+    pollSCM('* /5 * * *')
+    
+  }
   stages{
     stage ('Build'){
     steps {
@@ -12,9 +16,11 @@ pipeline{
       }
     }
    }
-  stage ('Deploy to staging'){
-    steps{
-      build job:'Deploy app'
+  stage ('Deployements'){
+    parallel{
+      stage ('Deploy to staging'){
+  steps{
+      sh "cp **/target/*.war /opt/tomcat/webapps"
     }
   }
   stage ('Deploy to prod'){
@@ -22,8 +28,10 @@ pipeline{
       timeout(time:5,unit:'DAYS'){
         input message:'Approve Prod deployment?'
       }
-      build job:'Deploy to prod'
+      sh "cp **/target/*.war /opt/tomcat-prod/webapps"
     }
   }
  }
+}
+  }
 }
