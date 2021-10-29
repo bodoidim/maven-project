@@ -17,5 +17,11 @@ pipeline{
       build job:'Deploy app'
     }
   }
+  stage ('Deploy to prod'){
+    steps{
+      timeout(time:5,unit:'DAYS')
+      build job:'Deploy to prod'
+    }
+  }
  }
 }
