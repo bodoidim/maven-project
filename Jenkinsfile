@@ -6,7 +6,6 @@ pipeline{
       echo "Init step"
     }
    }
-  }
   stage ('Build'){
     steps {
       echo "Build step"
@@ -17,4 +16,5 @@ pipeline{
       echo "Deploy step"
     }
   }
+ }
 }
