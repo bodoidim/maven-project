@@ -7,7 +7,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         vb.customize ["modifyvm", :id, "--memory", "256"]
     end
 
-    config.vm.define "app1" do |app
+    config.vm.define "app1" do |app|
         app.vm.hostname = "orc-app1.dev"
         app.vm.box = "geerlingguy/centos7"
         app.vm.network :private_network, ip: "192.168.60.4"
